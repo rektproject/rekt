@@ -945,7 +945,29 @@ int generateMTRandom(unsigned int s, int range)
 // miner's coin base reward based on nBits
 int64 GetProofOfWorkReward(int nHeight, int64 nFees, uint256 prevHash)
 {
-    int64 nSubsidy = 120 * COIN;
+    int64 nSubsidy = 2 * COIN;
+
+
+    if ( nHeight < 4000 )
+    {
+        nSubsidy = 120 * COIN;
+    }
+
+    else if ( nHeight < 5000 )
+    {
+        nSubsidy = 60 * COIN;
+    }
+
+    else if ( nHeight < 6000 )
+    {
+        nSubsidy = 20 * COIN;
+    }
+
+    else if ( nHeight < 7000 )
+    {
+        nSubsidy = 6 * COIN;
+    }
+
     return nSubsidy + nFees;
 }
 
@@ -2568,7 +2590,7 @@ bool LoadBlockIndex(bool fAllowNew)
 
         assert(block.hashMerkleRoot == uint256("0xaa3cf6df795c35a7942224dd590482a23b7253e158649bb48a611ef7d6a00fb3"));
 
-        if (true  && (block.GetHash() != hashGenesisBlock)) {
+        if (false  && (block.GetHash() != hashGenesisBlock)) {
 	 
 		// This will figure out a valid hash and Nonce if you're
 		// creating a different genesis block:
